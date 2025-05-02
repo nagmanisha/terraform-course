@@ -9,8 +9,13 @@ resource "aws_instance" "myec2" {
   
 }
 
+variable "users" {
+  type = list
+  default = ["alice", "bob", "john"]
+}
+
 resource "aws_iam_user" "that" {
-    name = "payments-user-${count.index}"
+    name = var.users[count.index]
     count = 3
 }
   
